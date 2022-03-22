@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">    
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">    
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="/css/tableexport.css">
+    <!-- Style -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Option 1: Include in HTML -->
+    <title>API Interface</title>
+  </head>
+  <body>
+    <div class="site-mobile-menu">
+      <div class="site-mobile-menu-header">
+        <div class="site-mobile-menu-close mt-3">
+          <span class="icon-close2 js-menu-toggle"></span>
+        </div>
+      </div>
+      <div class="site-mobile-menu-body"></div>
+    </div>
+    <header class="site-navbar" role="banner">
+      <div class="container">
+        <div class="row align-items-center">         
+          <div class="col-11 col-xl-2">
+            <h1 class="mb-0 site-logo"><a href="/" class="text-white mb-0">API Interface</a></h1>
+          </div>
+          <div class="col-12 col-md-10 d-none d-xl-block">
+            <nav class="site-navigation position-relative text-right" role="navigation">
+              <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
+                <li><a href="" data-toggle="modal" data-target="#modalSubscriptionForm"><span>Register</span></a></li>
+                <li><a href="#" onclick="pullReport();return false;"><span>Report</span></a></li>
+                <li class="has-children">
+                  <a href="#"><span>Timeframe</span></a>
+                  <ul class="dropdown arrow-top">
+                    <li><a href="#" onclick="setTimeframe('5mins','last 5 mins')"><span>last 5 mins</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('10mins','last 10 mins')"><span>last 10 mins</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('15mins','last 15 mins')"><span>last 15 mins</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('30mins','last 30 mins')"><span>last 30 mins</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('hour','last 1 hour')"><span>last 1 hour</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('2hours','last 2 hours')"><span>last 2 hours</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('6hours','last 6 hours')"><span>last 6 hours</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('day','last 1 day')"><span>last 1 day</span></a></li>
+                    <li><a href="#" onclick="setTimeframe('3days','last 3 days')"><span>last 3 days</span></a></li>
+                  </ul>
+                  <li class="has-children">
+                    <a href="#"><span>Export</span></a>
+                    <ul class="dropdown arrow-top">
+                      <li><a href="#" onclick="generateExcel('inventory');return false;"><span>Export Excel</span></a></li>
+                      <li class="divider"></li>
+                      <li><a href="#" onclick="generatePDF('reporting','inventory');return false;"><span>Export PDF</span></a></li>
+                    </ul>
+                  </li>
+                  </li>
+              </ul>
+            </nav>
+          </div>
+          <div class="d-inline-block d-xl-none ml-md-0 mr-auto py-3" style="position: relative; top: 3px;"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
+          </div>
+        </div>
+      </div>
+      <div id="messageModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div id="messageModalContent" class="modal-content align-items-center">
+            ...
+          </div>
+        </div>
+      </div>      
+      <div id="messageModal2" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 id="modalTitle" class="modal-title">Modal Title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p id="modalContent">Modal body text goes here.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div class="modal fade" id="modalSubscriptionForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+        <form>
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold">Register the Dynatrace API</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <span>To register, create an API Token in Dynatrace with the following permissions:<br/><strong>API v1 - Access problem and event feed, metrics and topology<br/>API v2 -Read Entities</strong><br/>                       
+                    Check the <a target="_blank" href="https://www.dynatrace.com/support/help/shortlink/api-authentication">Dynatrace documentation</a> for assistance.<br><br/>
+                    <label class="text-danger" for="actionButton" id="errorMessage"></label></span><br>
+                    <div class="md-form mb-5">
+                        <label data-error="wrong" data-success="right" for="url"><strong>Dynatrace Tenant URL</strong></label>
+                        <input value="" type="text" id="url" class="form-control validate" placeholder="https://xxx99999.live.dynatrace.com/">
+                        <label class="text-danger" for="url" id="urlMessage"></label>
+                        <br/><br/>                        
+                        <label data-error="wrong" data-success="right" for="token"><strong>Dynatrace API Token</strong></label>
+                        <input value="" type="text" id="token" class="form-control validate">
+                        <label class="text-danger" for="token" id="tokenMessage"></label>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button id="actionButton" class="btn btn-primary">Register</button>
+                    <br/>
+                    <label id="message"></label>
+                </div>
+            </div>
+        </form>
+      </div>
+    </div>
+    </header>
+    <div id="hero" class="hero-full" style="background-image: url('images/hero_0.jpg');">
+      <div class="hero-inner">
+        <div id="instructions"></div>
+        <div id="exporters" style="display: none;">
+          <caption class="tableexport-caption" style="">
+            <button type="button" tableexport-id="6239e3c3-xls" class="button-default xls">Export to XLS</button>&nbsp;&nbsp;
+            <button type="button" onclick="createPDF('reporting');" class="button-default">Export as PDF</button>&nbsp;
+          </caption>          
+        </div>
+        <div id="reporting"></div>
+      </div>      
+    </div>  
+    <script src="/js/jquery-3.3.1.min.js"></script>
+<!-- <script src="/js/popper.min.js"></script> -->
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.sticky.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/xlsx.core.min.js"></script>
+    <script src="/js/filesaver.min.js"></script>
+    <script src="/js/tableexport.min.js"></script>
+    <script src="/js/custom.js"></script>
+  </body>
+</html>
