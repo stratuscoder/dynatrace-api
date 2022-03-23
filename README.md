@@ -76,7 +76,7 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#quicklinks">QuickLinks</a></li>
   </ol>
 </details>
 
@@ -215,14 +215,15 @@ Project Link: [https://github.com/stratuscoder/dynatrace-api](https://github.com
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
+## QuickLinks
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
+Here are a few helpful resources.
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Pages](https://pages.github.com)
 * [Font Awesome](https://fontawesome.com)
 * [React Icons](https://react-icons.github.io/react-icons/search)
+* [Choose Dynatrace](https://dynatrace.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
