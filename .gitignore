@@ -102,3 +102,14 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Temporary db files
+*.ldb
+CURRENT
+LOCK
+LOG
+LOG.old
+MANIFEST-*
+
+#mac hidden files
+.DS_Store
