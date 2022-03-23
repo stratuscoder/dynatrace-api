@@ -1,12 +1,6 @@
 # dynatrace-api
 Projects that use the Dynatrace API.  Just bring your tenant URL and your token and enjoy these projects.
 
-<h2>To run projects, use the git clone to download the repo, then cd into the repo, then cd into the project</h2>
-<h2>Use `npm install` to install all the required node modules</h2>
-<h2>Use the `npm run server` to run the project locally.</h2>
-<h2>Access the project using your browser with the url and port indicated on the startup messaging</h2>
-
-
 <div id="top"></div>
 <!--
 *** Thanks for checking out the dynatrace-api. If you have a suggestion
@@ -38,21 +32,20 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
 <br />
 <div align="center">
   <a href="https://github.com/stratuscoder/dynatrace-api">
-    <img src="documentation/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="documentation/images/logo.png" alt="Logo" width="380" height="380">
   </a>
 
-  <h3 align="center">Dynatrace-API Projects</h3>
+  <h3 align="center">dynatrace-api projects</h3>
 
   <p align="center">
-    Projects that work with the Dynatrace API both in Dynatrace Managed and Dynatrace SaaS!
-    <br />
-    <a href="https://github.com/stratuscode/dynatrace-api/"><strong>Dynatrace API Projects »</strong></a>
+    Dynatrace API Projects that work with the Dynatrace Managed and SaaS tenants!
     <br />
     <br />
     ·
-    <a href="https://github.com/stratuscode/dynatrace-api/issues">Report Bug</a>
+    <a href="https://github.com/stratuscode/dynatrace-api/issues">If you find something that needs fixed, report it.</a>
+    <br />
     ·
-    <a href="https://github.com/stratuscode/dynatrace-api/network-inventopry"><strong>Network Inventory Project »</strong></a>
+    <a href="https://github.com/stratuscode/dynatrace-api/issues">If you have a feature or project request, add it.</a>
   </p>
 </div>
 
@@ -63,7 +56,7 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#about-the-repo">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
@@ -86,10 +79,10 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
 
 
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<!-- ABOUT THE REPO -->
+## About The Repo
 
-[![Product Name Screen Shot][screenshot-dynatrace-api]](https://github.com/stratuscoder/dynatrace-api/)
+[![Dynatrace API][screenshot-dynatrace-api]](https://github.com/stratuscoder/dynatrace-api/)
 
 This repo will contain many projects over time so check back regularly to see the progress of current and new projects.
 
@@ -99,12 +92,11 @@ Why are you doing this and sharing it publicly?
 * I love coding and extending the Dynatrace platform to other areas, that is why the Dynatrace API exists.
 * All of this code is designed to be fairly abstract in nature, while it is coupled to the Dynatrace API, it is abstract in the fact that you only need to provide a tenant URL and Token.
 
-Of course, according to my wife and kids I am not perfect so if you find something that is not working please create an issue and I will work on it.  I hope you enjoy these projects and get ideas for more projects.
+Of course, according to my wife and kids I am not perfect, so if you find something that is not working please create an issue and I will work on it.  I hope you enjoy these projects and get ideas for more projects.
 
 Thanks to all the people who will use these projects today, tomorrow, forever!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 ### Built With
@@ -118,6 +110,18 @@ This section shows the major/minor frameworks/libraries used to bootstrap these 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
+## About The Projects
+
+[![Dynatrace API - Network Inventory][screenshot-network-inventory]](https://github.com/stratuscoder/dynatrace-api/network-inventory)
+
+This project uses the Smartscape topology V1 API to extract hosts and their connection relationships with other hosts and processes. It can be used to get data that includes host names, OS details, hosts communication in incoming and outgoing directions, processes running on each host, Dynatrace host unit consumption, network port usage and technologies found on each hosts. The data is shown as an HTML expandable table and this project has a built in option to export the data as and EXCEL spreadsheet or a PDF document.
+
+If you find something that is not working please create an issue and I will work on it.  I hope you enjoy this projects and find it useful.
+
+Thank you today, tomorrow, forever!
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 <!-- GETTING STARTED -->
@@ -236,5 +240,5 @@ Use this space to list resources you find helpful and would like to give credit 
 [license-url]: https://github.com/stratuscoder/dynatrace-api/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/stratuscoder
-[screen-api]: documentation/images/screenshot-dynatrace-api.png
-[screen-networking]: documentation/images/screenshot-network-inventory.png
+[screenshot-dynatrace-api]: documentation/images/screenshot-dynatrace-api.png
+[screenshot-network-inventory]: documentation/images/screenshot-network-inventory.png
