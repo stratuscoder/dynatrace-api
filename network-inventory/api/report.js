@@ -81,8 +81,8 @@ const generateHTML = (c, h, p, t) =>
       return `
         <div class="table-responsive">
             <h3>Timeframe selected is last ${timeframe}</h3>
-            <h5>Click on the primary rows to toggle the detailed rows.</h5>
-            <table id="api-data" class="table table-hover table-light table-bordered table-condensed">
+            <p>Click on the primary rows to toggle the detailed rows.</p>
+            <table id="api-data" class="table table-hover table-light table-bordered table-condensed" style="font-family: sans-serif;font-size: 10px;font-weight: 600;">
                 <thead>
                 <tr class="table-active ">
                     <th scope="col" class="text-left">#</th>

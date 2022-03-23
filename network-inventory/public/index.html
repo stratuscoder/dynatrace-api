@@ -15,7 +15,7 @@
     <!-- Style -->
     <link rel="stylesheet" href="/css/style.css">
     <!-- Option 1: Include in HTML -->
-    <title>API Interface</title>
+    <title>Network Inventory Project</title>
   </head>
   <body>
     <div class="site-mobile-menu">
@@ -29,15 +29,14 @@
     <header class="site-navbar" role="banner">
       <div class="container">
         <div class="row align-items-center">         
-          <div class="col-11 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="/" class="text-white mb-0">API Interface</a></h1>
+          <div class="col-11 col-md-4">
+            <h1 class="mb-0 site-logo"><a href="/" class="text-white mb-0">Network Inventory</a></h1>
           </div>
-          <div class="col-12 col-md-10 d-none d-xl-block">
+          <div class="col-12 col-md-8 d-none d-xl-block">
             <nav class="site-navigation position-relative text-right" role="navigation">
               <ul class="site-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="" data-toggle="modal" data-target="#modalSubscriptionForm"><span>Register</span></a></li>
-                <li><a href="#" onclick="pullReport();return false;"><span>Report</span></a></li>
-                <li class="has-children">
+                <li class="has-children htm" style="display: none;">
                   <a href="#"><span>Timeframe</span></a>
                   <ul class="dropdown arrow-top">
                     <li><a href="#" onclick="setTimeframe('5mins','last 5 mins')"><span>last 5 mins</span></a></li>
@@ -50,15 +49,8 @@
                     <li><a href="#" onclick="setTimeframe('day','last 1 day')"><span>last 1 day</span></a></li>
                     <li><a href="#" onclick="setTimeframe('3days','last 3 days')"><span>last 3 days</span></a></li>
                   </ul>
-                  <li class="has-children">
-                    <a href="#"><span>Export</span></a>
-                    <ul class="dropdown arrow-top">
-                      <li><a href="#" onclick="generateExcel('inventory');return false;"><span>Export Excel</span></a></li>
-                      <li class="divider"></li>
-                      <li><a href="#" onclick="generatePDF('reporting','inventory');return false;"><span>Export PDF</span></a></li>
-                    </ul>
                   </li>
-                  </li>
+                  <li><a class="htm" href="#" onclick="pullReport();return false;" style="display: none;"><span>Report</span></a></li>
               </ul>
             </nav>
           </div>

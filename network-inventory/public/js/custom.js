@@ -116,7 +116,7 @@ function createPDF(id) {
     win.document.write('<body>');
     win.document.write(sTable);
     win.document.write('</body></html>');
-    win.alert('Pick Landscape, then set scale to 50 when print page pops up for correct PDF format.')
+    win.alert('FYI  - When the print page pops up. 1) Pick Landscape, 2) Adjust scale as needed to fit all data columns on same pages.')
     win.document.close();
     win.print();
 }
@@ -172,41 +172,43 @@ document.getElementById("actionButton").addEventListener('click', function(e){
     checkToken = isDynatraceToken(token);
     setTextMessage("#urlMessage",checkUrl);
     setTextMessage("#tokenMessage",checkToken);
-    if (checkUrl+checkToken != ""){
-        return false;
+    if (checkUrl+checkToken == ""){
+        let data = JSON.stringify({ 'url' : url, 'token' : token });
+        gToken = token;
+        gUrl = url;
+        console.log(data);
+        //using jquery to send post to api
+        $.ajax({
+            url: "/api/register",
+            type: "POST",
+            dataType: 'json',
+            contentType: 'application/json',
+            data: data,
+            processData: false,
+            success: function (data) {
+                console.log("1)"+data);
+                $("#actionButton").remove();
+                setTextMessage("#message","Successfully Registered the API.");
+                setHTMLModal("Successfully Registered the API, ready for reporting.", true);
+                $("#modalSubscriptionForm").modal('hide');
+                $('.htm').attr("style", "display: inline-block");
+            },
+            cache: false
+        }).fail(function(xhr, textStatus, error) {
+            if (xhr.status == 400) {
+                setTextMessage("#errorMessage",`Error: ${error}, Invalid data format was passed to API on backend, inform app developer.`);
+            } else if (xhr.status == 401) {
+                setTextMessage("#errorMessage",`Error: ${error}, Invalid URL, Credentials and/or Permissions.`);
+            } else if (xhr.status == 403) {
+                setTextMessage("#errorMessage",`Error: ${error}, Missing valid registration data.`);
+            } else if (xhr.status == 404) {
+                setTextMessage("#errorMessage",`Error: ${error}, Invalid Tenant URL, endpoint or firewall issue.`);
+            } else if (xhr.status == 500) {
+                setTextMessage("#errorMessage",`Error: ${error}, Check licensing consumption for possible limits.`);            
+            } else {
+                setTextMessage("#errorMessage",`Error: ${error}, Unexpected error.`);            
+            }
+        });
     }
-    let data = JSON.stringify({ 'url' : url, 'token' : token });
-    gToken = token;
-    gUrl = url;
-    console.log(data);
-    //using jquery to send post to api
-    $.ajax({
-        url: "/api/register",
-        type: "POST",
-        dataType: 'json',
-        contentType: 'application/json',
-        data: data,
-        processData: false,
-        success: function (data) {
-            console.log("1)"+data);
-            $("#actionButton").remove();
-            setTextMessage("#message","Successfully Registered the API.");
-            setHTMLModal("Successfully Registered the API, ready for reporting.", true);
-            $("#modalSubscriptionForm").modal('hide');
-        },
-        cache: false
-    }).fail(function(xhr, textStatus, error) {
-        if (xhr.status == 400) {
-            setTextMessage("#errorMessage",`Error: ${error}, Invalid data passed to API on backend, inform app developer.`);
-        } else if (xhr.status == 401) {
-            setTextMessage("#errorMessage",`Error: ${error}, Invalid URL/Credentials/Permissions.`);
-        } else if (xhr.status == 403) {
-            setTextMessage("#errorMessage",`Error: ${error}, Missing valid registration data.`);
-        } else if (xhr.status == 500) {
-            setTextMessage("#errorMessage",`Error: ${error}, Check licensing consumption.`);            
-        } else {
-            setTextMessage("#errorMessage",`Error: ${error}, Unexpected error.`);            
-        }
-    });
     e.preventDefault();
 });

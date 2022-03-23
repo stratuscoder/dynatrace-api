@@ -52,6 +52,8 @@ module.exports = function(route, app) {
                     res.status(401).json({ message: 'Check URL and Token.'});
                 } else if (error.message.includes('code 400')) {
                     res.status(400).json({ message: 'Invalid format of API called.'});
+                } else if (error.message.includes('code 404')) {
+                    res.status(404).json({ message: 'Invalid endpoint of API called.'});
                 } else {                 
                     res.status(500).json({ message: 'Unauthorized - Check URL and Token.'});
                 }

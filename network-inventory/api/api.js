@@ -34,4 +34,4 @@ const getApi = async (apiUrl, token) =>
   return resp.data;
 }
 
-module.exports = { getApi, API_V1_HOSTS_ALL, API_V1_PGIS_ALL , API_V2_HOSTS_ALL, API_V2_HOSTS_ONE, API_V2_PGIS_ALL, API_V2_PGIS_ONE };
+module.exports = { getApi, API_V1_HOSTS_ALL, API_V1_HOSTS_ALL_LIMIT, API_V1_PGIS_ALL , API_V2_HOSTS_ALL, API_V2_HOSTS_ONE, API_V2_PGIS_ALL, API_V2_PGIS_ONE, API_V1_PGIS_ALL_LIMIT };
