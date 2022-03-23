@@ -42,10 +42,10 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
     <br />
     <br />
     ·
-    <a href="https://github.com/stratuscode/dynatrace-api/issues">If you find something that needs fixed, report it.</a>
+    <a href="https://github.com/stratuscoder/dynatrace-api/issues">If you find something that needs fixed, report it.</a>
     <br />
     ·
-    <a href="https://github.com/stratuscode/dynatrace-api/issues">If you have a feature or project request, add it.</a>
+    <a href="https://github.com/stratuscoder/dynatrace-api/issues">If you have a feature or project request, add it.</a>
   </p>
 </div>
 
@@ -56,10 +56,13 @@ Projects that use the Dynatrace API.  Just bring your tenant URL and your token 
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-repo">About The Project</a>
+      <a href="#about-the-repo">About The Repo</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
       </ul>
+    </li>
+    <li>
+      <a href="#about-the-projects">About The Projects</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -113,7 +116,11 @@ This section shows the major/minor frameworks/libraries used to bootstrap these 
 
 ## About The Projects
 
-[![Dynatrace API - Network Inventory][screenshot-network-inventory]](https://github.com/stratuscoder/dynatrace-api/network-inventory)
+<div align="center">
+  <h3 align="center">dynatrace-api project : Network Inventory</h3>
+</div>
+
+[![Dynatrace API - Network Inventory][screenshot-network-inventory]](https://github.com/stratuscoder/dynatrace-api/tree/main/network-inventory)
 
 This project uses the Smartscape topology V1 API to extract hosts and their connection relationships with other hosts and processes. It can be used to get data that includes host names, OS details, hosts communication in incoming and outgoing directions, processes running on each host, Dynatrace host unit consumption, network port usage and technologies found on each hosts. The data is shown as an HTML expandable table and this project has a built in option to export the data as and EXCEL spreadsheet or a PDF document.
 
@@ -170,30 +177,23 @@ _Below is an example of how you can use the project on this repo once it is up a
 
 
 
-<!-- USAGE EXAMPLES -->
-## Usage
-
-This space will be used to show useful examples of how a project can be used. Additional screenshots, code examples and demos will fill up this space in the future.
-
-_For more examples, please refer to the [Documentation](https://github.com/stratuscoder/dynatrace-api)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- ROADMAP -->
-## Roadmap
+## Roadmap aka Ideas
 
 - [x] Add Changelog
 - [x] Add back to top links
+- [x] Add more content to documentation to help other easily use these projects
 - [ ] Add Additional Projects w/ examples
-- [ ] Add more content to documentation to help other easily use these projects
 - [ ] Multi-language Support
     - [ ] Spanish
 
 See the [open issues](https://github.com/stratuscoder/dynatrace-api/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
+
+
 
 
 <!-- LICENSE -->
@@ -208,9 +208,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+stratuscoder - [@stratuscoder](https://twitter.com/stratuscoder) - stratuscoder@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://github.com/stratuscoder/dynatrace-api](https://github.com/stratuscoder/dynatrace-api)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
