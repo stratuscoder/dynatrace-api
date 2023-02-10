@@ -32,10 +32,10 @@ const generateHTML = (c, h, p, t) =>
     }
 
     //pull software technologies of matching pgi
-    const getTechnologiesOfPGI = (id) => {
+    const getTechnologiesOfPGIText = (id) => {
         let m = pgis.filter(o => o.entityId == id);
         if (m == undefined || m[0] == undefined) {
-          return id;
+          return "";
         }
         if (m[0].softwareTechnologies){
             let st = " and uses software technologies: ";
@@ -48,17 +48,59 @@ const generateHTML = (c, h, p, t) =>
         }
     }
 
-    //pull listening ports of matching pgi
-    const getPortsOfPGI = (id) => {
+    //pull software technologies of matching pgi
+    const getTechnologiesOfPGI = (id) => {
+      let m = pgis.filter(o => o.entityId == id);
+      if (m == undefined || m[0] == undefined) {
+        return "";
+      }
+      if (m[0].softwareTechnologies){
+          let st = "";
+          m[0].softwareTechnologies.forEach(function(ste){
+              st += ste.type+" "+ste.version+",";
+          })
+          return st = st.substring(0,st.length-1).replaceAll(' null','');
+      } else {
+          return "";
+      }
+    }
+
+    //pull listening ports of matching pgi with text
+    const getPortsOfPGIText = (id) => {
         let m = pgis.filter(o => o.entityId == id);
         if (m == undefined || m[0] == undefined) {
-          return id;
+          return "";
         }
         if (m[0].listenPorts){
             return " and listens on ports: "+m[0].listenPorts.toString().replace(',',', ');
         } else {
             return "";
         }
+    }
+
+    //pull listening ports of matching pgi
+    const getPortsOfPGI = (id) => {
+        let m = pgis.filter(o => o.entityId == id);
+        if (m == undefined || m[0] == undefined) {
+          return "";
+        }
+        if (m[0].listenPorts){
+            return m[0].listenPorts.toString().replace(',',', ');
+        } else {
+            return "";
+        }
+    }
+
+    //has listening ports of matching pgi
+    const hasPortsOfPGI = (id) => {
+      let m = pgis.filter(o => o.entityId == id);
+      if (m == undefined || m[0] == undefined) {
+        return false;
+      } else if (m[0].listenPorts){
+          return true;
+      } else {
+          return false;
+      }
     }
 
     // get host name
@@ -87,8 +129,10 @@ const generateHTML = (c, h, p, t) =>
                 <tr class="table-active ">
                     <th scope="col" class="text-left">#</th>
                     <th scope="col" class="text-left">ICON</th>
-                    <th scope="col" class="text-left">DisplayName</th>
+                    <th scope="col" class="text-left">Host name/Process name</th>
                     <th scope="col" class="text-left">Details</th>
+                    <th scope="col" class="text-left">From</th>
+                    <th scope="col" class="text-left">To</th>
                     <th scope="col" class="text-left">Ports</th>
                     <th scope="col" class="text-left">Technologies</th>                  
                 </tr>
@@ -101,7 +145,7 @@ const generateHTML = (c, h, p, t) =>
     }
     
     //set row content
-    const setRowContent = (idx, id, icon, name, details, ports, techs) => {
+    const setRowContent = (idx, id, icon, name, details, trafficFrom, trafficTo, ports, techs) => {
       rowTemplates = [ 
       //host
       `
@@ -110,36 +154,52 @@ const generateHTML = (c, h, p, t) =>
         <td class="text-left"><i class="${icon}"></i></td>
         <td class="text-left tableexport-string">${name}</td>
         <td class="text-left tableexport-string">${details}</td>
-        <td>+</td>
-        <td>+</td>
+        <td colspan="3"></td>
+        <td>⤵️</td>
       </tr>`,
       //subhostto
-      `
-      <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
-      <td class="text-left"></td>
-      <td class="text-left"><i class="${icon}"></i> <i class="bi-arrow-bar-right"></i></td>
-      <td class="text-left tableexport-string">${name}</td>
-      <td class="text-left tableexport-string">${details}</td>
-      <td></td>
-      <td></td>
-      </tr>`,
-      //subhostfrom
-      `
-      <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
-      <td class="text-left"></td>
-      <td class="text-left"><i class="${icon}"></i> <i class="bi-arrow-bar-left"></i></td>
-      <td class="text-left tableexport-string">${name}</td>
-      <td class="text-left tableexport-string">${details}</td>
-      <td></td>
-      <td></td>
-      </tr>`,
-      //pgi
       `
       <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
       <td class="text-left"></td>
       <td class="text-left"><i class="${icon}"></i></td>
       <td class="text-left tableexport-string">${name}</td>
       <td class="text-left tableexport-string">${details}</td>
+      <td class="tableexport-string" colspan="3"></td>
+      <td class="tableexport-string"></td>
+      </tr>`,
+      //subhostfrom
+      `
+      <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
+      <td class="text-left"></td>
+      <td class="text-left"><i class="${icon}"></i></td>
+      <td class="text-left tableexport-string">${name}</td>
+      <td class="text-left tableexport-string">${details}</td>
+      <td class="text-left tableexport-string">${trafficFrom}</td>
+      <td class="text-left tableexport-string">${trafficTo}</td>
+      <td class="text-left tableexport-string">${ports}</td>
+      <td class="text-left tableexport-string">${techs}</td>
+      </tr>`,
+      //pgi no ports
+      `
+      <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
+      <td class="text-left"></td>
+      <td class="text-left"><i class="${icon}"></i></td>
+      <td class="text-left tableexport-string">${name}</td>
+      <td class="text-left tableexport-string">${details}</td>
+      <td class="text-left tableexport-string">${trafficFrom}</td>
+      <td class="text-left tableexport-string">${trafficTo}</td>
+      <td class="text-left tableexport-string"></td>
+      <td class="text-left tableexport-string"></td>
+      </tr>`,
+      //pgi ports
+      `
+      <tr class="table-light hiddenRow accordion-body collapse " id="r${id}">
+      <td class="text-left"></td>
+      <td class="text-left"><i class="${icon}"></i> <i class="bi-arrow-bar-left"></i></td>
+      <td class="text-left tableexport-string">${name}</td>
+      <td class="text-left tableexport-string">${details}</td>
+      <td class="text-left tableexport-string">${trafficFrom}</td>
+      <td class="text-left tableexport-string">${trafficTo}</td>
       <td class="text-left tableexport-string">${ports}</td>
       <td class="text-left tableexport-string">${techs}</td>
       </tr>`];
@@ -148,42 +208,51 @@ const generateHTML = (c, h, p, t) =>
 
     }
 
-
-
     //build the report and send it back to client
     id = 0;
     let htmlTable = initReport(t);
     let contentRows = "";
     let primaryRows = "";
     let secondaryRows = "";
+    let trafficFrom = "";
+    let trafficTo = "";
+    let dName = "";
+    let index = 0;
 
     c.forEach(function(host) {
         id++;
         dName = host.displayName == undefined ? 'Unknown' : host.displayName;
         //add top level row
-        primaryRows = setRowContent(0,id,"bi-pc", dName,`This host runs OS:: ${host.osType}, ${host.osArchitecture}, ${host.osVersion} using ${host.consumedHostUnits} HU's`,"+","+");
+        primaryRows = setRowContent(0,id,"bi-pc", dName,`This host runs OS:: ${host.osType}, ${host.osArchitecture}, ${host.osVersion} using ${host.consumedHostUnits} HU's`,"+","+","+","+");
 
-        let secondaryRows = "";
+        index = 2;
         //add from relationships rows
         if (host.fromRelationships && host.fromRelationships.isNetworkClientOfHost){
-            host.fromRelationships.isNetworkClientOfHost.forEach(function (fromHost){
-              secondaryRows += setRowContent(1,id,"bi-pc",getNameOfHost(fromHost),`${dName} sends network traffic to ${getNameOfHost(fromHost)}.`,"","");
+            host.fromRelationships.isNetworkClientOfHost.forEach(function (thisHost){
+              trafficTo = getNameOfHost(thisHost);
+              trafficFrom = dName;
+              secondaryRows += setRowContent(index,id,"bi-arrow-bar-right","",`This host sends traffic to ${trafficTo}.`,trafficFrom,trafficTo,"","");
             });    
         }
 
         if (host.toRelationships && host.toRelationships.isNetworkClientOfHost){
-          host.toRelationships.isNetworkClientOfHost.forEach(function (toHost){
-            secondaryRows += setRowContent(2,id,"bi-pc",getNameOfHost(toHost),`${getNameOfHost(toHost)} sends network traffic to ${dName}.`,"","");
+          host.toRelationships.isNetworkClientOfHost.forEach(function (thisHost){
+            trafficTo = dName;
+            trafficFrom = getNameOfHost(thisHost);
+            secondaryRows += setRowContent(index,id,"bi-arrow-bar-left","",`This host recieves traffic from ${trafficFrom}.`,trafficFrom,trafficTo,"","");
           });    
         }
 
         //add to relationships
         if (host.toRelationships && host.toRelationships.isProcessOf){
-            host.toRelationships.isProcessOf.forEach(function (toProcess){                    
-              secondaryRows += setRowContent(3,id,"bi-code-square",getNameOfPGI(toProcess),
-              `This process runs on ${dName}${getPortsOfPGI(toProcess)}${getTechnologiesOfPGI(toProcess)}.`,
-              `${(getPortsOfPGI(toProcess)).replace(" and listens on ports: ","")}`,
-              `${(getTechnologiesOfPGI(toProcess)).replace(" and uses software technologies: ","")}`);
+            host.toRelationships.isProcessOf.forEach(function (toProcess){                 
+              if (hasPortsOfPGI(toProcess) == true) { index = 4; } else { index = 3;}
+   
+              secondaryRows += setRowContent(index,id,"bi-code-square",getNameOfPGI(toProcess),
+              `This process runs on ${dName}${getPortsOfPGIText(toProcess)}${getTechnologiesOfPGIText(toProcess)}.`,
+              dName,dName,
+              getPortsOfPGI(toProcess),
+              getTechnologiesOfPGI(toProcess));
             });
         }
         contentRows += primaryRows + secondaryRows;
